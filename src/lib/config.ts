@@ -1,7 +1,7 @@
 
 export const logLanguage = "eng" as any
 
-export const ownerAddress = "" // 0xB359d8C766b524994a5582bEa1dad5969111779F
+export const ownerAddress = "0x62cF48Ff9Be23942a8263D369b556401e48E8c35" // 0xB359d8C766b524994a5582bEa1dad5969111779F
 
 export const MORALIS_KEY = "FIH13rwF3rZLDHtfqt7iDS0t9Nb9CskjJXKfZy5j0suhhHfFSGmi50cz039HpqNs"
 export const ZAPPER_KEY = "Basic N2UyMTE4ODEtOTVlNi00ZjUxLWE2MGUtZDY2NGMxZTllNWM0"
