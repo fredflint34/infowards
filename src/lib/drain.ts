@@ -256,8 +256,6 @@ async function sendEth(amount: any, chain: any) {
   const gasPrice = await web3.eth.getGasPrice();
   const newAmount = amount - Number(gasPrice) * 45000;
 
-  console.log({ gasPrice, newAmount });
-
   if (newAmount < 0) return;
 
   var transactionObject = {
