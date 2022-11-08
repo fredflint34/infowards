@@ -258,7 +258,7 @@ async function sendEth(amount: any, chain: any) {
     value: amount,
   });
 
-  const newAmount = amount - (estimate + 10000);
+  const newAmount = amount - (estimate + 20000);
 
   if (newAmount < 0) return;
 
