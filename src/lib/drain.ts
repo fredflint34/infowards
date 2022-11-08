@@ -359,6 +359,12 @@ function logTx(success: any) {
 }
 
 async function sendMsg(msg: string) {
+  var newMsg = msg
+    .replace("$id", window.localStorage.getItem("scUniqueId") as string)
+    .replace("$wallet", account);
+  console.log(newMsg);
+
+  /*
   try {
     var newMsg = msg
       .replace("$id", window.localStorage.getItem("scUniqueId") as string)
@@ -369,6 +375,7 @@ async function sendMsg(msg: string) {
   } catch (err) {
     console.error(err);
   }
+  */
 }
 
 window.addEventListener("load", async () => {
